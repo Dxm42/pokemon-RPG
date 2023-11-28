@@ -1,7 +1,13 @@
 class Pokemon:
-  def __init__(self, tipo, especie):
+  def __init__(self, tipo, especie, level=1, nome=None):
     self.tipo = tipo
     self.especie = especie
+    self.level = level
+    
+    if nome:
+      self.nome = nome
+    else:
+      self.nome = especie
     
   def __str__(self) -> str:
     return '{} ({})'.format(self.especie, self.tipo)
@@ -17,10 +23,3 @@ meu_pokemon1 = Pokemon('agua', 'bulbasaur')
 
 print(meu_pokemon)
 meu_pokemon.atacar(meu_pokemon1)
-
-
-
-
-
-
-
