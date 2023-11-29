@@ -1,25 +1,49 @@
+import random
 class Pokemon:
-  def __init__(self, tipo, especie, level=1, nome=None):
-    self.tipo = tipo
+  def __init__(self, especie, level=None, nome=None):
     self.especie = especie
-    self.level = level
+    if level:      
+      self.level = level
+    else:
+      self.level = random.randint(1, 100)
     
     if nome:
       self.nome = nome
     else:
       self.nome = especie
     
+    self.ataque = self.level * 5
+    self.vida = self.level * 10
+    
   def __str__(self) -> str:
-    return '{} ({})'.format(self.especie, self.tipo)
+    return '{} ({})'.format(self.nome, self.level)
   
   def atacar(self, pokemon):
-    print('{} atacou {}'.format(self, pokemon))
-  
-  
-  
-  
-meu_pokemon = Pokemon('fogo', 'charmander')
-meu_pokemon1 = Pokemon('agua', 'bulbasaur')
+    pokemon.vida = pokemon.vida - self.ataque
+    print('{} perdeu {} pontos de vida'.format(pokemon, self.ataque))
 
-print(meu_pokemon)
-meu_pokemon.atacar(meu_pokemon1)
+    if pokemon.vida <= 0:
+      print('{} foi derrotado'.format(pokemon))
+      return True
+    else:
+      return False
+      
+# Herança - Para Herdar uma classe usa-se parenteses -> (classe a ser herdada)
+class PokemonEletrico(Pokemon):
+  tipo = 'Eletric'
+  def atacar(self, pokemon):
+    print('{} lançou um ataque de trovão em {}'.format(self, pokemon))
+    return super().atacar(pokemon)
+  
+class PokemonFogo(Pokemon):
+  tipo = 'Fire'
+  def atacar(self, pokemon):
+    print('{} lançou um ataque de fogo em {}'.format(self, pokemon))
+    return super().atacar(pokemon)
+  
+class PokemonAgua(Pokemon):
+  tipo = 'Water'
+  def atacar(self, pokemon):
+    print('{} lançou um ataque de aguá em {}'.format(self, pokemon))
+    return super().atacar(pokemon)
+  
