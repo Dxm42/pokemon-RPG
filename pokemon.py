@@ -2,6 +2,7 @@ import random
 class Pokemon:
   def __init__(self, especie, level=None, nome=None):
     self.especie = especie
+    
     if level:      
       self.level = level
     else:
@@ -19,8 +20,9 @@ class Pokemon:
     return '{} ({})'.format(self.nome, self.level)
   
   def atacar(self, pokemon):
-    pokemon.vida = pokemon.vida - self.ataque
-    print('{} perdeu {} pontos de vida'.format(pokemon, self.ataque))
+    ataque_efetivo =  int(self.ataque * random.random() * 1.3)
+    pokemon.vida = pokemon.vida - ataque_efetivo
+    print(f'{pokemon} perdeu {ataque_efetivo:.0f} pontos de vida')
 
     if pokemon.vida <= 0:
       print('{} foi derrotado'.format(pokemon))

@@ -31,10 +31,12 @@ def escolher_pokemon_inicial(player):
 
 player = Player('Lucas')    
 escolher_pokemon_inicial(player)
+player.mostrar_dinheiro()
+#player.mostrar_pokemons()
 
+#inimigo1 = Inimigo(name='Gary', pokemons=[PokemonAgua('Squirtle')])
+
+
+#player.batalhar(inimigo1)
+player.explorar()
 player.mostrar_pokemons()
-
-inimigo1 = Inimigo(name='Gary', pokemons=[PokemonAgua('Squirtle')])
-
-
-player.batalhar(inimigo1)

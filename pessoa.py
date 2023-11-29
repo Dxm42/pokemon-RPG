@@ -17,13 +17,14 @@ POKEMONS = [
 
 class Pessoa:  
   
-  def __init__(self, name=None, pokemons=[]) -> None:
+  def __init__(self, name=None, pokemons=[], dinheiro=100) -> None:
     if name:
       self.name = name
     else:
       self.name = random.choice(NOMES)
     
     self.pokemons = pokemons
+    self.dinheiro = dinheiro
   
   def __str__(self) -> str:
     return self.name
@@ -45,6 +46,14 @@ class Pessoa:
       print('Esse jogador não possui nenhum pokemon para ser escolhido')      
       
 
+  def mostrar_dinheiro(self):
+    print('Você possui {}'.format(self.dinheiro))
+    
+  def ganhar_dinheiro(self, quantidade):
+    self.dinheiro += quantidade 
+    print('Você ganhou $ {}'.format(quantidade))   
+    self.mostrar_dinheiro()
+    
   def batalhar(self, pessoa):
       print('{} iniciou uma batalha com {}'.format(self, pessoa))
       pessoa.mostrar_pokemons()
@@ -57,6 +66,7 @@ class Pessoa:
           vitoria = pokemon.atacar(pokemon_inimigo)
           if vitoria:
             print('{} ganhou a batalha'.format(self))
+            self.ganhar_dinheiro(pokemon_inimigo.level * 10)
             break            
           vitoria_inimiga = pokemon_inimigo.atacar(pokemon)
           
@@ -88,7 +98,22 @@ class Player(Pessoa):
           print('Escolha invalida')
     else:
       print('Esse jogador não possui nenhum pokemon para ser escolhido')      
+  def explorar(self):
+    if random.random() <= 0.3:
+      pokemon = random.choice(POKEMONS)
+      print('Um pokemon selvagem apareceu: {}'.format(pokemon))
       
+      escolha = input('Deseja capturar o Pokemon (s/n): ')
+      if escolha == 's':
+        if random.random() >= 0.5:
+          self.capturar(pokemon)
+        else:
+          print('O Pokemon {} fugiu!!!'.format(pokemon))
+      else:
+        print('Ok, boa viagem')
+    else:
+      print('Essa exploração nao deu em nada')
+       
 class Inimigo(Pessoa):
   tipo = 'Inimigo'  
   
