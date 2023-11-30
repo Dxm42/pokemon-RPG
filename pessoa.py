@@ -117,10 +117,17 @@ class Player(Pessoa):
 class Inimigo(Pessoa):
   tipo = 'Inimigo'  
   
-  def __init__(self, name=None, pokemons=[]) -> None:
-    super().__init__(name, pokemons)
+  def __init__(self, name=None, pokemons=None) -> None:
     if not pokemons:
+      pokemons_aleatorios = []
       for i in range(7):
-        pokemons.append(random.choice(POKEMONS)) 
+        pokemons_aleatorios.append(random.choice(POKEMONS)) 
+        
+      super().__init__(name=name, pokemons=pokemons_aleatorios)
+    else:
+      super().__init__(name=name, pokemons=pokemons)
+      
+    
+        
         
   
